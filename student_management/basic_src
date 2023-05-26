@@ -1,0 +1,210 @@
+package com.java.main;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// 학생정보 : 학번, 이름, 학년, 학과, 생년월일, 주소, 연락처, 상태
+
+		String studentNum = "";
+		String name = "";
+		int grade = 0;
+		String major = ""; // yyyy-mm-dd
+		String birth = "";
+		String address = "";
+		String contact = ""; // 010-0000-0000
+		String state = ""; // 재학, 휴학, 제적, 졸업
+		// 종료시 q를 입력하기 때문에 int가 아닌 String
+		String menu = "";
+
+		Scanner sc = new Scanner(System.in);
+		// ㅂ+한자를 사용해 테두리를 보기 좋게 만들어보자
+
+		do {
+			System.out.println("┌───────────────────────────────────────────────────────────────┐");
+			System.out.println("│　1. 학생등록　│　2. 학생조회　│　3. 학생수정　│　4. 학생삭제　│");
+			System.out.println("└───────────────────────────────────────────────────────────────┘");
+			System.out.print("메뉴 (종료 : q)>");
+			menu = sc.nextLine();
+
+			switch (menu) {
+			case "1":
+				// 실행문
+				System.out.println("\n\n");
+				System.out.println("┌───────────────────────────────────────────────────────────────┐");
+				System.out.println("│　1. 학생등록　　　　　　　　　　　　　　　　　　　　　　　　　│");
+				System.out.println("└───────────────────────────────────────────────────────────────┘");
+				// 학번
+				System.out.print("학번 ex)2305889001 >");
+				studentNum = sc.nextLine();
+				// 이름
+				System.out.print("이름 ex)홍길동 >");
+				name = sc.nextLine();
+				// 학년
+				System.out.print("학년 ex)1 >");
+				grade = sc.nextInt();
+				sc.nextLine();
+				// 학과
+				System.out.print("학과 ex)정보통신공학 >");
+				major = sc.nextLine();
+				// 생년월일
+				System.out.print("생년월일 ex)2023-05-26 >");
+				birth = sc.nextLine();
+				// 주소
+				System.out.print("주소 (시/도 구/군 동/면) ex)서울시 노원구 공릉동 >");
+				address = sc.nextLine();
+				// 연락처
+				System.out.print("연락처 ex)010-0000-0000 >");
+				contact = sc.nextLine();
+				// 상태
+				System.out.print("상태 ex)재학/휴학/제적/졸업 >");
+				state = sc.nextLine();
+				// 결과 출력
+				System.out.println("\n");
+				System.out.println("학생등록 결과 화면");
+				System.out.println("┌────────────────────────────────────┐");
+				System.out.printf("　1. 학번 : %s\n", studentNum);
+				System.out.printf("　2. 이름 : %s\n", name);
+				System.out.printf("　3. 학년 : %d학년\n", grade);
+				System.out.printf("　4. 학과 : %s\n", major);
+				System.out.printf("　5. 생년월일 : %s\n", birth);
+				System.out.printf("　6. 주소 : %s\n", address);
+				System.out.printf("　7. 연락처 : %s\n", contact);
+				System.out.printf("　8. 상태 : %s\n", state);
+				System.out.println("└────────────────────────────────────┘");
+				break;
+
+			case "2":
+				//등록하지 않고 출력할 수 없도록 한다
+				//!(studentNum != null && studentNum.length() > 0)
+				if (studentNum == null || studentNum.length() <= 0) {
+					System.out.println("\n\n");
+					System.out.println("입력된 학생정보가 없습니다.");
+					System.out.println("\n\n");
+					break;
+				}
+
+				// 실행문 : 학생이 한 명이다
+				System.out.println("\n\n");
+				System.out.println("┌───────────────────────────────────────────────────────────────┐");
+				System.out.println("│　2. 학생조회　　　　　　　　　　　　　　　　　　　　　　　　　│");
+				System.out.println("└───────────────────────────────────────────────────────────────┘");
+				System.out.println("\n\n");
+				System.out.println("학생조회 결과 화면");
+				System.out.println("┌────────────────────────────────────┐");
+				System.out.printf("　1. 학번 : %s\n", studentNum);
+				System.out.printf("　2. 이름 : %s\n", name);
+				System.out.printf("　3. 학년 : %d학년\n", grade);
+				System.out.printf("　4. 학과 : %s\n", major);
+				System.out.printf("　5. 생년월일 : %s\n", birth);
+				System.out.printf("　6. 주소 : %s\n", address);
+				System.out.printf("　7. 연락처 : %s\n", contact);
+				System.out.printf("　8. 상태 : %s\n", state);
+				System.out.println("└────────────────────────────────────┘");
+				break;
+				
+			case "3":
+				if (studentNum == null || studentNum.length() <= 0) {
+					System.out.println("\n\n");
+					System.out.println("입력된 학생정보가 없습니다.");
+					System.out.println("\n\n");
+					break;
+				}
+				
+				System.out.println("\n\n");
+				System.out.println("┌───────────────────────────────────────────────────────────────┐");
+				System.out.println("│　3. 학생수정　　　　　　　　　　　　　　　　　　　　　　　　　│");
+				System.out.println("└───────────────────────────────────────────────────────────────┘");
+				
+				boolean flag = true;
+				do {
+					System.out.println("\n\n");
+					System.out.println("등록된 학생정보");
+					System.out.println("┌────────────────────────────────────┐");
+					System.out.printf("　1. 학번 : %s\n", studentNum);
+					System.out.printf("　2. 이름 : %s\n", name);
+					System.out.printf("　3. 학년 : %d학년\n", grade);
+					System.out.printf("　4. 학과 : %s\n", major);
+					System.out.printf("　5. 생년월일 : %s\n", birth);
+					System.out.printf("　6. 주소 : %s\n", address);
+					System.out.printf("　7. 연락처 : %s\n", contact);
+					System.out.printf("　8. 상태 : %s\n", state);
+					System.out.println("└────────────────────────────────────┘");
+					System.out.print("수정 항목 선택 (나가기 : q)>");
+					menu = sc.nextLine();
+					
+					switch(menu) {
+					case "1": //학번
+						System.out.print("학번 ex)2305889001 >");
+						studentNum = sc.nextLine();
+						break;
+					case "2": //이름
+						System.out.print("이름 ex)홍길동 >");
+						name = sc.nextLine();
+						break;
+					case "3": //학년
+						System.out.print("학년 ex)1 >");
+						grade = sc.nextInt();sc.nextLine();
+						break;
+					case "4": //학과
+						System.out.print("학과 ex)정보통신공학 >");
+						major = sc.nextLine();
+						break;
+					case "5": //생년월일
+						System.out.print("생년월일 ex)2023-05-26 >");
+						birth = sc.nextLine();
+						break;
+					case "6": //주소
+						System.out.print("주소 (시/도 구/군 동/면) ex)서울시 노원구 공릉동 >");
+						address = sc.nextLine();
+						break;
+					case "7": //연락처
+						System.out.print("연락처 ex)010-0000-0000 >");
+						contact = sc.nextLine();
+						break;
+					case "8": //상태
+						System.out.print("상태 ex)재학/휴학/제적/졸업 >");
+						state = sc.nextLine();
+						break;
+					case "q": case"Q":
+						System.out.println("\n\n");
+						System.out.println("학생수정을 종료합니다.");
+						System.out.println("\n\n");
+						flag = false;
+						break;
+					default:
+						break;
+					}
+				}while(flag);
+				
+				break;
+			case "4":
+				//코드 구조상 학번만 초기화해도 됨
+				studentNum = "";
+				name = "";
+				grade = 0;
+				major = "";
+				birth = "";
+				address = "";
+				contact = "";
+				state = "";
+				System.out.println("\n\n");
+				System.out.println("┌───────────────────────────────────────────────────────────────┐");
+				System.out.println("│　4. 학생삭제　　　　　　　　　　　　　　　　　　　　　　　　　│");
+				System.out.println("└───────────────────────────────────────────────────────────────┘");
+				System.out.println("\n\n");
+				System.out.println("학생정보가 삭제되었습니다.");
+				break;
+			case "q":
+			case "Q":
+				return;
+			default:
+				;
+			}
+			System.out.print("이어서 진행하려면 아무키나 누르세요.");
+			sc.nextLine();
+			System.out.println("\n\n");
+		} while (true);
+	}
+}
