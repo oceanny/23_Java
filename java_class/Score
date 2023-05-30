@@ -1,0 +1,38 @@
+package com.java.dto;
+
+public class Score {
+	
+	//필드 : 성적(학번, 이름, 국어, 영어, 수학, 과학, 총점, 평균)
+	//묵시적 초기화 : reference type → null, number type → 0, boolean → false
+	public String stuNum;
+	public String name;
+	public int kor;
+	public int eng;
+	public int math;
+	public int scien;
+	//제한자를 private로 설정해 값을 직접 입력하지 못하게 설정함
+	private int total;
+	private float avg;
+	
+	//생성자 : 필드 초기화 → 묵시적 초기화로 인해 의미 없어짐 → 기능 사라진 생성자를 기본 생성자라고 부름
+	/*
+	 * public Score() { stuNum = null; name = null; kor = 0; eng = 0; math = 0;
+	 * scien = 0; total = 0; avg = 0f; }
+	 */
+	
+	//메소드 : 총점(), 평균()
+	//제한자 리턴타입 메소드명(매개변수들) throws 예외{}
+	public void total() {
+		total = kor + eng + math + scien;
+	}
+	
+	public void avg() {
+		avg = total / 4f;
+	}
+	
+	public String outputScore() {
+		return stuNum + "\t" + name + "\t" + kor + "\t" + eng + "\t" + math + "\t" + scien + "\t" + total + "\t" + avg;
+	}
+
+
+}
