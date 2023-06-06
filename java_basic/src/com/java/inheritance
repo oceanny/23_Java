@@ -1,0 +1,87 @@
+package com.java.inheritance;
+
+public class Car {
+	
+	private String serial_number;
+	private String engine;
+	private int gear;
+	private int accelerate;
+	private int breakk;
+	
+	public Car() {
+		this.accelerate = 11;
+		this.breakk = 0;
+		this.engine = "그랜저 엔진";
+		
+	}
+	
+	public Car(String serial_number, String engine, int gear, int accelerate, int breakk) {
+		super();
+		this.serial_number = serial_number;
+		this.engine = engine;
+		this.gear = gear;
+		this.accelerate = accelerate;
+		this.breakk = breakk;
+	}
+	
+	public void drive() {}
+	
+	public void speedUp() {
+		this.accelerate++;		
+	}
+	
+	public void speedDown() {
+		this.accelerate--;
+		this.breakk++;
+	}
+	
+	public void stop() {}
+	
+//	setter getter method -> 직접 만들지 말고 소스에서 만들면 된다 (캡슐화)
+//	public void set변수명(변수명타입 변수){
+//		this.멤버변수 = 변수;
+//	}
+//	
+//	public 변수타입 get변수명() {
+//		return this.멤버변수;
+//	}
+	
+
+	public String getSerial_number() {
+		return serial_number;
+	}
+
+	public void setSerial_number(String serial_number) {
+		this.serial_number = serial_number;
+	}
+
+	public String getEngine() {
+		return engine;
+	}
+
+	public void setEngine(String engine) {
+		this.engine = engine;
+	}
+
+	public int getGear() {
+		return gear;
+	}
+
+	public void setGear(int gear) {
+		this.gear = gear;
+	}
+
+//	setAccelerate를 지워 speedUp, speedDown으로만 값이 조절되게 함
+	public int getAccelerate() {
+		return accelerate;
+	}
+
+	public int getBreakk() {
+		return breakk;
+	}
+
+	public void setBreakk(int breakk) {
+		this.breakk = breakk;
+	}
+	
+}
