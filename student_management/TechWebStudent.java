@@ -1,6 +1,9 @@
 package com.java.dto;
 
-public class TechWebStudent extends WebStudent {
+// WebStudent를 상속받으면 Student와 Loginable을 모두 사용 가능해짐
+// Student <- WebStudent <- Loginable 이라는 관계도를 알면 Student를 상속받는 코드로 수정 가능
+// 그러면 WebStudent내에 생성된 멤버 변수를 굳이 가져오지 않음
+public class TechWebStudent extends WebStudent{
 
 //	abstract class 상속 시 method 구현 필수
 	@Override
@@ -18,7 +21,6 @@ public class TechWebStudent extends WebStudent {
 		}
 		
 		return result;
-
 	}
 
 }
