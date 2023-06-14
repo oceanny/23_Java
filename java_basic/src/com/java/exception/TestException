@@ -1,0 +1,65 @@
+package com.java.exception;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class TestException {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("예외 처리 연습 시작");
+
+		while (true) {
+			try {
+				System.out.print("날짜 입력 (yyyy-MM-dd) : ");
+				String dateStr = sc.nextLine();
+				Date today = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+				break;
+			} catch (ParseException e) {
+				System.out.println("날짜 형식이 올바르지 않습니다.");
+			}
+		}
+
+		while (true) {
+
+			try {
+				System.out.print("정수 입력 : ");
+				String intStr = sc.nextLine();
+				int i = Integer.parseInt(intStr);
+				break;
+			} catch (NumberFormatException e) {
+//			e.printStackTrace();
+				System.out.println(e.getMessage() + "의 문제 발생");
+			}
+		}
+		System.out.println("예외 처리 연습 끝");
+
+		try {
+			new TestException().throwException();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+//		throwException()이 묶어 보내면 처리가 곤란해짐
+//		굳이 케이스를 나누지 않고 Exception e 라고 선언해도 됨
+//		try {
+//			new TestException().throwException();
+//		} catch (ClassNotFoundException | NullPointerException e) {
+//			e.printStackTrace();
+//		}
+		
+	}
+
+	public void throwException() throws ClassNotFoundException, NullPointerException {
+		if (true) {
+			throw new ClassNotFoundException();
+		} else {
+			throw new NullPointerException();
+		}
+	}
+
+}
