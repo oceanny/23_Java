@@ -1,0 +1,66 @@
+package com.java.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestOracleConnectionNotUse {
+
+	public static void main(String[] args) throws Exception {
+		
+//		* 실무에서 사용하지 않는 이유 *
+//		1. DB에서 허용하는 수치를 초과하면 에러 발생(getCoonection)
+//		2. DB가 클래스 내에 있기 때문에 외부에서 사용하려면 코드를 다시 짜야함
+//		3. 계정과 url에 따라 다시 코드를 짜야함
+//		4. member.set 코드에서 같은 부분이 반복됨
+//		5. 쿼리문 만들기 쉬워야 함
+		
+//		driver 주기
+		String driver = "oracle.jdbc.driver.OracleDriver";
+//		String url = "jdbc:oracle:thin:@ip:port:SIDname";
+//		port : oracle express version -> 1521
+//		SIDname : oracle express version -> XE
+		String url = "jdbc:oracle:thin:@localhost:1521:XE";
+		String username = "java";
+		String password = "java";
+		
+//		1. driver loading -> DriverManager
+		Class.forName(driver);
+//		2. get connection
+		Connection conn = DriverManager.getConnection(url, username, password);
+//		3. SQL
+		String sql = "select * from 고객";
+//		4. statement
+		Statement stmt = conn.createStatement();
+//		5. 질의 전송
+//		sql이 select가 아니면 execute가 아니고 update -> 서로 이어짐
+		ResultSet rs = stmt.executeQuery(sql);
+//		6. result를 vo로 사상 -> 객체화
+		List<MemberVO> memberList = new ArrayList<MemberVO>();
+		
+		while(rs.next()) {
+			MemberVO member = new MemberVO();
+//			인덱스명 말고 column 명이 정확함
+			member.set고객아이디(rs.getString("고객아이디"));
+			member.set나이(rs.getInt("나이"));
+			member.set고객이름(rs.getString("고객이름"));
+			member.set등급(rs.getString("등급"));
+			member.set적립금(rs.getInt("적립금"));
+			member.set직업(rs.getString("직업"));
+			
+			memberList.add(member);
+			
+		}
+		
+//		7. connection close
+		if (conn != null) conn.close();
+		
+//		주소값이 출력됨 -> toString override
+		System.out.println(memberList);
+		
+	}
+
+}
