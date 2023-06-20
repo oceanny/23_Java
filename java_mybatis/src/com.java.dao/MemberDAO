@@ -1,0 +1,14 @@
+package com.java.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.dto.MemberVO;
+
+public interface MemberDAO {
+	
+	List<MemberVO> selectMemberList() throws SQLException;
+//	Member를 받아오기(객체지향)
+	void insertMember(MemberVO member) throws SQLException;
+	
+}
