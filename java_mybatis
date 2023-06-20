@@ -1,0 +1,19 @@
+package com.java.main;
+
+import java.util.List;
+
+import com.java.dao.MemberDAO;
+import com.java.dao.MemberDAOImpl;
+import com.java.dto.MemberVO;
+
+public class TestMybatis {
+
+	public static void main(String[] args) throws Exception {
+		MemberDAO dao = new MemberDAOImpl();
+		
+		List<MemberVO> memberList = dao.selectMemberList();
+		
+		System.out.println(memberList);
+	}
+	
+}
