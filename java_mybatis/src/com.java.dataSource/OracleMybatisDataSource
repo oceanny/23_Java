@@ -1,0 +1,42 @@
+package com.java.dataSource;
+
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class OracleMybatisDataSource {
+	
+//	single-tone pattern
+	private static OracleMybatisDataSource instance = new OracleMybatisDataSource();
+	private OracleMybatisDataSource() {}
+	public static OracleMybatisDataSource getInstance(){
+		return instance;
+	}
+	
+	private SqlSessionFactory sqlSessionFactory;
+	
+//	초기화 블록
+	{
+		String config = "com/java/mybatis/config/sqlConfig.xml";
+		
+		try {
+			Reader reader = Resources.getResourceAsReader(config);
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			reader.close();
+			
+			System.out.println("sqlSessionFactory 성공했습니다.");
+		}catch(Exception e) {
+			System.out.println("sqlSessionFacotry 실패했습니다.");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
+	}
+	
+	
+}
