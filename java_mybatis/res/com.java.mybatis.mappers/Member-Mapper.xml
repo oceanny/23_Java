@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : file name과 같게 -->
+<mapper namespace="Member-Mapper">
+	<select id="selectMemberList" resultType="member">
+		<!-- 쿼리문 따옴표 X -->
+		select *
+		from 고객
+	</select>
+	<insert id="insertMember" parameterType="member">
+		insert into 고객(고객아이디,고객이름,나이,직업,등급,적립금))
+		values (#{고객아이디},#{고객이름},#{나이},#{직업},#{등급},#{적립금})
+	</insert>
+</mapper>
