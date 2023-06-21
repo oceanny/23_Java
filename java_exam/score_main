@@ -1,0 +1,11 @@
+package com.java.exam;
+
+public class score_main {
+
+	public static void main(String[] args) {
+		score_switch repeat = new score_switch();
+		do {
+			repeat.repeat();
+		} while (true);
+	}
+}
