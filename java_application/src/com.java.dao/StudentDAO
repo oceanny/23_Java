@@ -1,0 +1,22 @@
+package com.java.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.dto.StudentVO;
+
+public interface StudentDAO {
+	
+	List<StudentVO> selectStudentList() throws SQLException;
+	
+	StudentVO selectStudentByStuNum(String stuNum) throws SQLException;
+	
+	String selectStateByNum(int num) throws SQLException;
+	
+	void insertStudent(StudentVO student) throws SQLException;
+	
+	void updateStudent(StudentVO student) throws SQLException;
+	
+	void deleteStudent(String stuNum) throws SQLException;
+	
+}
