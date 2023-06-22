@@ -1,0 +1,20 @@
+package com.java.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.java.dto.MemberVO;
+
+public class TestMemberDAOImpl {
+	private MemberDAO dao = new MemberDAOImpl();
+
+	@Test
+	public void testSelectMemberList() throws SQLException {
+		List<MemberVO> memberList = dao.selectMemberList();
+		
+		Assert.assertEquals(8, memberList.size());
+	}
+}
