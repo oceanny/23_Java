@@ -1,0 +1,46 @@
+package com.java.dataSource;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Assert;
+
+import com.java.dto.MemberVO;
+
+public class TestOracleMybatisDataSource {
+	
+	private SqlSessionFactory factory = OracleMybatisDataSource.getInstance().getSqlSessionFactory();
+//	before init에서 할당해줌
+	private SqlSession session;
+	
+//	실험은 순서가 없고 각각 독립적
+//	return 없이 void로 만들어야함
+//	parameter 없이 만들기
+//	exception throw는 성공 실패 기준이 아니고 error로 잡힘
+//	throw의 존재여부는 상관없지만 catch는 넣지 말걸
+	
+//	test 시작시 session 만들기
+	@Before
+	public void init() {
+//		openSession시 autocommit이 false -> 따로 commit해줘야 함
+		session = factory.openSession();
+	}
+	
+	@Test
+	public void test1() {
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
+		
+		Assert.assertEquals(8, memberList.size());
+	}
+	
+//	test 끝나면 session 반납
+	@After
+	public void complete() {
+		if (session != null) session.close();
+	}
+
+}
