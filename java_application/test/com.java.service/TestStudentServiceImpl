@@ -1,0 +1,63 @@
+package com.java.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.java.command.StudentCommand;
+import com.java.dto.StudentVO;
+
+public class TestStudentServiceImpl {
+	
+	private StudentService stuService = new StudentServiceImpl();
+	
+	@Test
+	public void testStudentList() throws SQLException {
+		List<StudentCommand> stuCommandList = stuService.list();
+		Assert.assertEquals(1, stuCommandList.size());
+	}
+	
+	@Test
+	public void testStudent() throws SQLException {
+//		db에서 해당 학번을 가진 학생의 state가 재학인지 확인 -> Command로 확인
+		String targetStuNum = "20230619001";
+		StudentCommand student = stuService.detail(targetStuNum);
+		Assert.assertEquals("재학", student.getStateStr());
+	}
+	
+	@Test
+	public void testDML() throws SQLException {
+//		db에 정보가 남지 않게 하기 위해 insert, update, delete 모두 진행
+		
+//		test 대상
+		StudentVO student = new StudentVO();
+		student.setEntDate("2023-06-20");
+		student.setName("김철수");
+		student.setPhone("01000000000");
+		student.setPwd("123456789");
+		student.setRegister("12345678");
+		student.setState(1);
+		student.setStuNum("20230620001");
+		
+//		insert
+		stuService.regist(student);
+//		receiveStu에 insert한 정보를 똑같이 넣어줌
+		StudentVO receiveStu = stuService.detail(student.getStuNum());
+		Assert.assertEquals(student.getStuNum(), receiveStu.getStuNum());
+		
+//		update
+		String testName = "강철중";
+		student.setName(testName);
+		stuService.modify(student);
+		receiveStu = stuService.detail(student.getStuNum());
+		Assert.assertEquals(testName, receiveStu.getName());
+		
+//		delete
+		stuService.remove(student.getStuNum());
+		receiveStu = stuService.detail(student.getStuNum());
+		Assert.assertNull(receiveStu);
+	}
+	
+}
