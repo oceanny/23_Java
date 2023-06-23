@@ -1,0 +1,83 @@
+package com.java.dataSource;
+
+import java.io.Reader;
+import java.sql.Connection;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.TransactionIsolationLevel;
+
+// implements 인터페이스 가져와서 케이스 모양을 휴대폰 모양에 맞춤
+// class 이름은 extends를 따라감 -> implements는 기능(옵션)
+// 이 클래스는 extends 없어서 implements 사용
+
+public class MireSqlSessionFactory implements SqlSessionFactory {
+	
+//	외부에서도 사용 가능하도록 싱글톤 패턴 사용 X
+	private SqlSessionFactory factory;
+//	초기화
+	{
+		String config = "com/java/mybatis/config/sqlConfig.xml";
+		
+		try {
+			Reader reader = Resources.getResourceAsReader(config);
+
+			factory = new SqlSessionFactoryBuilder().build(reader);
+			reader.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public Configuration getConfiguration() {
+		return factory.getConfiguration();
+	}
+
+	@Override
+	public SqlSession openSession() {
+		return factory.openSession(true);
+	}
+
+	@Override
+	public SqlSession openSession(boolean arg0) {
+		return factory.openSession(arg0);
+	}
+
+	@Override
+	public SqlSession openSession(Connection arg0) {
+		return factory.openSession(arg0);
+	}
+
+	@Override
+	public SqlSession openSession(TransactionIsolationLevel arg0) {
+		return factory.openSession(arg0);
+	}
+
+	@Override
+	public SqlSession openSession(ExecutorType arg0) {
+		return factory.openSession(arg0);
+	}
+
+	@Override
+	public SqlSession openSession(ExecutorType arg0, boolean arg1) {
+		return factory.openSession(arg0, arg1);
+	}
+
+	@Override
+	public SqlSession openSession(ExecutorType arg0, TransactionIsolationLevel arg1) {
+		return factory.openSession(arg0, arg1);
+	}
+
+	@Override
+	public SqlSession openSession(ExecutorType arg0, Connection arg1) {
+		return factory.openSession(arg0, arg1);
+	}
+
+}
