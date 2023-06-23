@@ -1,0 +1,22 @@
+package com.java.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.command.StudentCommand;
+import com.java.dto.StudentVO;
+
+public interface StudentService {
+	
+//	학생전체조회
+	List<StudentCommand> list() throws SQLException;
+//	학생상세조회
+	StudentCommand detail(String stuNum) throws SQLException;
+//	학생등록
+	void regist(StudentVO student) throws SQLException;
+//	학생수정
+	void modify(StudentVO student) throws SQLException;
+//	학생삭제
+	void remove(String stuNum) throws SQLException;
+	
+}
