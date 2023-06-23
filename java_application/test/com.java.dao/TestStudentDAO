@@ -1,0 +1,58 @@
+package com.java.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.java.dto.StudentVO;
+
+public class TestStudentDAO {
+//	datasource, db에 문제가 없다는 조건 하에 테스트 진행 가능
+	private StudentDAO stuDAO = new StudentDAOImpl();
+//	properties에서 JUnit4 추가
+	@Test
+	public void testStudentList() throws SQLException {
+		List<StudentVO> stuList = stuDAO.selectStudentList();
+		Assert.assertEquals(1, stuList.size());
+	}
+	@Test
+	public void testStudent() throws SQLException {
+//		내가 입력한 stuNum
+		String stuNum = "20230619001";
+//		DB를 통해 받은 student -> 학번
+		StudentVO student = stuDAO.selectStudentByStuNum(stuNum);
+		Assert.assertEquals(stuNum, student.getStuNum());
+	}
+//	insert test시 실제 insert되므로 inert, delete 진행하는 test case
+	@Test
+	public void testDMLStudent() throws SQLException {
+		StudentVO student = new StudentVO();
+		student.setEntDate("2023-06-20");
+		student.setName("김철수");
+		student.setPhone("01000000000");
+		student.setPwd("123456789");
+		student.setRegister("12345678");
+		student.setState(1);
+		student.setStuNum("20230620001");
+		
+//		insert
+		stuDAO.insertStudent(student);
+		
+		StudentVO receiveStu = stuDAO.selectStudentByStuNum(student.getStuNum());
+		Assert.assertEquals(student.getStuNum(), receiveStu.getStuNum());
+//		update
+		String testName = "강철수";
+		student.setName(testName);
+		stuDAO.updateStudent(student);
+		receiveStu = stuDAO.selectStudentByStuNum(student.getStuNum());
+		Assert.assertEquals(testName, receiveStu.getName());
+//		delete
+		stuDAO.deleteStudent(student.getStuNum());
+		receiveStu = stuDAO.selectStudentByStuNum(student.getStuNum());
+		Assert.assertNull(receiveStu);
+		
+	}
+	
+}
