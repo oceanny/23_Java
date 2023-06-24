@@ -1,0 +1,52 @@
+package com.java.command;
+
+import java.sql.SQLException;
+
+import com.java.dao.StudentDAO;
+import com.java.dao.StudentDAOImpl;
+import com.java.dto.StudentVO;
+
+public class StudentCommand extends StudentVO {
+	
+//	state의 숫자와 매칭되는 내용값을 출력하기 위해 상속
+//	따라서 state만 재정의 후 나머지는 StudentVO 그대로 사용
+	private String stateStr;
+
+	public String getStateStr() {
+		return stateStr;
+	}
+
+	public void setStateStr(String stateStr) {
+		this.stateStr = stateStr;
+	}
+	
+	
+//	student를 StudentCommand로 변경
+	public void toStudentCommand(StudentVO student) {
+		
+//		student가 null이면 진행 X
+		if (student == null) return;
+		
+//		state를 제외한 나머지는 그대로 세팅
+		this.setEntDate(student.getEntDate());
+		this.setName(student.getName());
+		this.setPhone(student.getPhone());
+		this.setPwd(student.getPwd());
+		this.setRegDate(student.getRegDate());
+		this.setRegister(student.getRegister());
+		this.setStuLevel(student.getStuLevel());
+		this.setStuNum(student.getStuNum());
+		
+//		StudentDAO를 불러와 받은 student의 state 번호를 넘겨줌
+		StudentDAO stuDAO = new StudentDAOImpl();
+		String stateStr = null;
+		try {
+			stateStr = stuDAO.selectStateByNum(student.getState());
+			setStateStr(stateStr);
+		} catch (SQLException e) {
+//			에러 발생시 상태를 -로 출력함
+			setStateStr("-");
+			e.printStackTrace();
+		}
+	}
+}
