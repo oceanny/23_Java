@@ -1,0 +1,14 @@
+package com.java.main;
+
+import com.java.dispatcher.Dispatcher;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		싱글톤 패턴
+		Dispatcher.setInitController("/common/loginForm");
+		Dispatcher dis = Dispatcher.getInstance();
+		dis.start();
+	}
+
+}
