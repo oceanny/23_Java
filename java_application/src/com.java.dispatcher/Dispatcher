@@ -1,0 +1,61 @@
+package com.java.dispatcher;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import com.java.controller.Controller;
+import com.java.controller.ControllerMapper;
+import com.java.view.View;
+import com.java.view.ViewMapper;
+
+public class Dispatcher {
+
+//	Dispatcher : 총괄 -> 한개 -> 싱글톤 패턴
+	private static String initController = "/main";
+
+	public static void setInitController(String controllerURL) {
+		initController = controllerURL;
+	}
+
+	private static Dispatcher instance = new Dispatcher();
+	private Dispatcher() {}
+	public static Dispatcher getInstance() {
+		return instance;
+	}
+
+//	초기화
+	private ControllerMapper conMapper = ControllerMapper.getInstance();
+	private ViewMapper viewMapper = ViewMapper.getInstance();
+
+	public void start() {
+//		주고 받을 model과 requestMap 선언
+		Map<String, Object> model = null;
+		Map<String, String> requestMap = null;
+
+		Controller cont = conMapper.getController(initController);
+		while (true) {
+//			계속 반복 but 인스턴스 반복 생성 X
+//			-> container에 있는 걸 계속 꺼내 사용
+			try {
+//				controller -> model
+				model = cont.process(requestMap);
+//				model -> view
+				String viewURL = (String) model.get("viewURL");
+				View view = viewMapper.getView(viewURL);
+				
+				requestMap = view.view(model);
+//				view -> controller
+				String controllerURL = requestMap.get("controllerURL");
+				cont = conMapper.getController(controllerURL);
+			} catch (SQLException e) {
+				System.out.println("시스템 장애로 인해 서비스가 불가합니다.\n");
+				cont = conMapper.getController("/main");
+			} catch (Exception e) {
+				System.out.println("해당 기능은 서비스 준비중입니다.\n");
+				cont = conMapper.getController("/main");
+			}
+		}
+
+	}
+
+}
