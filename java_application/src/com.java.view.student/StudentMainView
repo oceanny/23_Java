@@ -1,0 +1,59 @@
+package com.java.view.student;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import com.java.view.View;
+
+public class StudentMainView implements View {
+
+	@Override
+	public Map<String, String> view(Map<String, Object> model) throws Exception {
+		String controllerURL = "";
+
+		boolean flag = false;
+		String stuNum = null;
+		do {
+			System.out.println("	　　◆ 학생 관리 ◆");
+			System.out.println("──────────────────────────────────────");
+			System.out.println("　1. 조회　2. 등록　3. 수정　4. 삭제　");
+			System.out.println("──────────────────────────────────────");
+			System.out.print("선택 (메인메뉴 : m) >");
+			Scanner sc = new Scanner(System.in);
+			String menu = sc.nextLine();
+
+			switch (menu) {
+			case "1": // 조회
+				controllerURL = "/student/list";
+				break;
+			case "2": // 등록
+				controllerURL = "/student/registForm";
+				break;
+//			수정과 삭제는 학생 번호를 받는 부분이 필요함
+			case "3": // 수정
+				controllerURL = "/student/modifyForm";
+				System.out.print("학생 번호 : ");
+				stuNum = sc.nextLine();
+				break;
+			case "4": // 삭제
+				controllerURL = "/student/remove";
+				System.out.print("학생 번호 : ");
+				stuNum = sc.nextLine();
+				break;
+			case "m": // 메인메뉴
+			case "M":
+				controllerURL = "/main";
+				break;
+			default:
+				flag = true;
+			}
+		} while (flag);
+
+		Map<String, String> requestMap = new HashMap<String, String>();
+		requestMap.put("controllerURL", controllerURL);
+		requestMap.put("stuNum", stuNum);
+		return requestMap;
+	}
+
+}
