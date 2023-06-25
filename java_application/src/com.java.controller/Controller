@@ -1,0 +1,10 @@
+package com.java.controller;
+
+import java.util.Map;
+
+public interface Controller {
+	
+//	Map<> model : view에서 받음 -> process return Map : view로 보냄
+	public Map<String, Object> process(Map<String, String> request) throws Exception;
+	
+}
