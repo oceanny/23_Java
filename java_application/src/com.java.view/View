@@ -1,0 +1,14 @@
+package com.java.view;
+
+import java.util.Map;
+
+public interface View {
+	
+//	Map : 사용자가 작성한 parameterData, 뭘 실행할지 나타내는 Controller name 포함
+//	Map request : controller가 넘겨준 정보 (ex. StuList, ViewName)
+//	View가 내보내면 Controller가 받고 Controller가 주면 View가 받음
+//	-> return type이 거꾸로 되어 있음
+	public Map<String ,String> view(Map<String, Object> model) throws Exception;
+	
+	
+}
