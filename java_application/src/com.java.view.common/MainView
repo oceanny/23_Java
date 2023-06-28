@@ -1,0 +1,56 @@
+package com.java.view.common;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import com.java.view.View;
+
+public class MainView implements View {
+
+	@Override
+	public Map<String, String> view(Map<String, Object> model) throws Exception {
+		String controllerURL = "null";
+		
+		boolean flag;
+		do {
+			System.out.println("	　　　　◆ 성적 관리 프로그램 ◆");
+			System.out.println("──────────────────────────────────────────────────────");
+			System.out.println("　1. 학생관리　2. 과목관리　3. 시험관리　4. 직원관리　");
+			System.out.println("──────────────────────────────────────────────────────");
+			System.out.print("선택 (로그아웃 : q	종료 : x) >");
+			
+			flag = false;
+			String menu = new Scanner(System.in).nextLine();
+			switch (menu) {
+			case "1": //학생관리
+				controllerURL = "/student/main";
+				break;
+			case "2": //과목관리
+				controllerURL = "/subject/main";
+				break;
+			case "3": //시험관리
+				controllerURL = "/exam/main";
+				break;
+			case "4": //직원관리
+				controllerURL = "/staff/main";
+				break;
+			case "q":case "Q":
+				controllerURL = "common/logout";
+				break;
+			case "x":case "X":
+				System.out.println("\n\n프로그램을 종료합니다.");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("\n\n입력이 올바르지 않습니다.");
+				flag = true;
+			}
+		}while(flag);
+
+		Map<String, String> requestMap = new HashMap<String, String>();
+		requestMap.put("controllerURL", controllerURL);
+		return requestMap;
+	}
+
+}
