@@ -1,0 +1,57 @@
+package com.java.view.exam;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import com.java.dto.StaffVO;
+import com.java.session.Session;
+import com.java.view.View;
+
+public class ExamMainView implements View {
+
+	@Override
+	public Map<String, String> view(Map<String, Object> model) throws Exception {
+		String controllerURL = "";
+
+		boolean flag = false;
+		String stuNum = null;
+		System.out.println("	　　◆ 시험 관리 ◆");
+		System.out.println("──────────────────────────────────────");
+		System.out.println("　1. 조회");
+//			학생일 때와 직원일 때를 구분해 메뉴를 보여줌
+		Session session = Session.getInstance();
+		Object loginUser = session.getAttribute("loginUser");
+
+		if (loginUser instanceof StaffVO) {
+			System.out.println("　2. 등록　3. 수정　4. 삭제　");
+		}
+		System.out.println("──────────────────────────────────────");
+		System.out.print("선택 (나가기 : q) >");
+
+		String menu = new Scanner(System.in).nextLine();
+		switch (menu) {
+		case "1": // 조회
+			controllerURL = "/exam/list";
+			break;
+		case "2": // 등록
+			controllerURL = (loginUser instanceof StaffVO) ? "/exam/registForm" : "/exam/list";
+			break;
+		case "3": // 수정
+//				stuNum = sc.nextLine();
+			break;
+		case "4": // 삭제
+			System.out.print("학생 번호 : ");
+			break;
+		case "q": // 메인메뉴
+		case "Q":
+			controllerURL = "/main";
+			break;
+		}
+
+		Map<String, String> requestMap = new HashMap<String, String>();
+		requestMap.put("controllerURL", controllerURL);
+		return requestMap;
+	}
+
+}
