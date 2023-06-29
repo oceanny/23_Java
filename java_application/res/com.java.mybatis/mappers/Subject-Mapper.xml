@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Subject-Mapper">
+	
+	<resultMap type="subject" id="subMap">
+		<id property="subNum" column="subNum"/>
+		<result property="subName" column="subName"/>
+		<result property="entNum" column="entNum"/>
+		<result property="state" column="state"/>
+		<result property="clazz" column="class"/>
+		<result property="grade" column="grade"/>
+		<result property="term" column="term"/>
+		<result property="teacher" column="teacher"/>
+	</resultMap>
+
+	<select id="selectSubjectList" parameterType="str" resultMap="subMap">
+		select *
+		from subject
+		where subName like '%'||#{subName}||'%'
+	</select>
+
+	<select id="selectSubjectBySubNum" parameterType="str" resultMap="subMap">
+		select *
+		from subject
+		where subNum = #{subNum}
+	</select>
+	
+	<insert id="inserSubject" parameterType="subject">
+		insert into subject(subNum,subName,entNum,state,class,grade,term,teacher)
+		values (#{subNum},#{subName},#{entNum},#{state},#{clazz},#{grade},#{term},#{teacher})
+	</insert>
+	
+	<update id="updateSubject" parameterType="subject">
+		update subject
+		set subName=#{subName},entNum=#{entNum},state=#{state},class=#{clazz},
+		grade=#{grade},term=#{term},teacher=#{teacher}
+		from subNum = #{subNum}
+	</update>
+	
+	<delete id="delectSubject" parameterType="str">
+		delete *
+		from subject
+		where subNum = #{subNum}
+	</delete>
+</mapper>
