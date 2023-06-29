@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties resource="com/java/properties/jdbc.properties" />
+
+	<typeAliases>
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+
+		<typeAlias type="com.java.dto.StudentVO" alias="student" />
+		<typeAlias type="com.java.dto.StaffVO" alias="staff" />
+		<typeAlias type="com.java.dto.SubjectVO" alias="subject" />
+		<typeAlias type="com.java.dto.ExamVO" alias="exam" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driverClassName}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+
+				<!-- pool setting -->
+				<property name="poolMaximumActiveConnections" value="2" />
+				<property name="poolMaximumIdleConnections" value="10" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/java/mybatis/mappers/Student-Mapper.xml" />
+		<mapper resource="com/java/mybatis/mappers/Staff-Mapper.xml" />
+		<mapper resource="com/java/mybatis/mappers/Subject-Mapper.xml" />
+		<mapper resource="com/java/mybatis/mappers/Exam-Mapper.xml" />
+	</mappers>
+
+</configuration>
