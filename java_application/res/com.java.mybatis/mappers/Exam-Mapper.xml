@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Exam-Mapper">
+
+	<select id="selectExamList" resultType="exam">
+		select *
+		from exam
+	</select>
+
+	<select id="selectExamByExamNum" parameterType="str"
+		resultType="exam">
+		select *
+		from exam
+		where examNum = #{examNum}
+	</select>
+
+
+	<insert id="insertExam" parameterType="exam">
+		insert into
+		exam(examNum,examDate,term,grade,score,stuNum,subNum)
+		values
+		(#{examNum},#{examDate},#{term},#{grade},#{score},#{stuNum},#{subNum})
+	</insert>
+
+
+	<update id="updateExam" parameterType="exam">
+		update exam
+		set
+		examNum=#{examNum},examDate=#{examDate},term=#{term},grade=#{grade},score=#{score},stuNum=#{stuNum},subNum=#{subNum}
+		where examNum = #{examNum}
+	</update>
+
+
+	<delete id="deleteExam" parameterType="str">
+		delete
+		from exam
+		where
+		examNum = #{examNum}
+	</delete>
+</mapper>
