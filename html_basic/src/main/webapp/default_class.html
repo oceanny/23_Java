@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS3 Selector Basic</title>
+<style>
+.btn {
+	display: block;
+	
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	
+	border: 1px solid gray;
+	
+	font-weight: 550;
+	font-size: 10pt;
+	text-decoration: none;
+	
+	cursor: pointer;
+}
+
+.btn-confirm {
+	background: #aaf;
+	color: #555;
+}
+
+.btn-cancle {
+	background: #f77;
+	color: #555;
+}
+
+.btn-hold {
+	background: #dd3;
+	color: #555;
+}
+</style>
+</head>
+<body>
+	<p class="btn btn-cancle">버튼이 꿈인 p</p>
+	<a href="https://www.naver.com" class="btn btn-confirm">never ever</a>
+	&nbsp;&nbsp;
+	<span onclick="location.href='https://www.daum.net';" class="btn btn-cancle">next</span>
+	&nbsp;&nbsp;
+	<label class="btn btn-hold">보류</label>
+	&nbsp;&nbsp;
+	<span class="btn">글자는 커지지 않는다</span>
+</body>
+</html>
