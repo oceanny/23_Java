@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS3 Property Basic</title>
+<style>
+.box {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+}
+
+.box:nth-child(1) {
+	background-color: red;
+	/* left: 10px;
+	top: 10px; */
+	z-index: 100;
+}
+
+.box:nth-child(2) {
+	background-color: green;
+	left: 150px;
+	/* top: 50px; */
+	z-index: 10;
+}
+
+.box:nth-child(3) {
+	background-color: blue;
+	/* left: 90px;
+	top: 90px; */
+	z-index: 1;
+}
+
+body > div#box_wrap{
+	width: 400px;
+	height: 100px;
+	border: 3px solid black;
+	overflow: hidden;
+	position: relative;
+}
+</style>
+</head>
+<body>
+<!-- box를 div 블럭 안에 넣지 않으면 h1을 1번지로 착각해 꼬임
+nth-child는 .box만 고려하지 않고 같은 body를 생각함
+-> .box:nth-child는 n번째인데 box가 붙은 코드만 스타일 적용 -->
+	<h1>Lorem ipsum dolor amet</h1>
+	<div id="box_wrap">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<h1>Lorem ipsum dolor amet</h1>
+</body>
+</html>
