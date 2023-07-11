@@ -1,0 +1,63 @@
+package com.java.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+// uri : /background/css
+// uri는 stream식이어도 menu 구조로 체계적이게 만들어야 함(ex. a안에 b안에 c)
+// Servlet에는 extends HTTpServlet 필수
+// @WebServlet을 작성해야 xml 파일에 작성 없이 실행 가능
+//@WebServlet("/background/css")
+public class BackgroundServlet extends HttpServlet {
+
+// 훅 메소드 : 구현부가 비어있는 메소드 -> 사용하지 않으면 작성하지 않아도 실행 가능하도록
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		표준출력 console : /background/css에 접속시 콘솔에 출력됨
+//		PrintStream out = System.out;
+
+		String viewURL = "/backgroundForm.jsp";
+		
+		request.getRequestDispatcher(viewURL).forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String viewURL = "/backgroundForm.jsp";
+		
+//		사용자가 색상을 입력해 배경색을 변경할 수 있게 함
+		String color = request.getParameter("color");
+		request.setAttribute("color", color);
+		request.getRequestDispatcher(viewURL).forward(request, response);
+		
+//		브라우저가 html로 인식하게 함
+//		response.setContentType("text/html;charset=utf-8");
+//		외부출력 browser : /background/css에 접속시 브라우저에 출력됨
+//		PrintWriter out = response.getWriter();
+//		
+//		out.println("<DOCTYPE html>");
+//		out.println("<html>");
+//		
+//		out.println("<head>");
+//		out.println("<meta charSet=\"UTF-8\">");
+//		
+//		out.println("<title>");
+//		out.println("</title>");
+//		
+//		out.println("<style>");
+//		out.println("body{");
+//		out.println("background:" + color + ";");
+//		out.println("}");
+//		out.println("</style>");
+//		
+//		out.println("</head>");
+//		
+//		out.println("<body>");
+//		out.println("</body>");
+//		
+//		out.println("</html>");
+	}
+
+}
