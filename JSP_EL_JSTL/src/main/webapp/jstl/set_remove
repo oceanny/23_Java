@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- pageContext.setAttribute("message", "good day!"); --%>
+
+<c:set var="message" value="good page!" scope="page"/>
+<c:set var="message" value="good request!" scope="request"/>
+<%-- remove는 value 없이 key(var)만 있으면 됨 --%>
+<c:remove var="message" scope="request"/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%-- key 값이 같아도 scope가 다르므로 구분해서 출력 가능--%>
+<h1>page message : ${pageScope.message }</h1>
+<h1>request message : ${requestScope.message }</h1>
+</body>
+</html>
